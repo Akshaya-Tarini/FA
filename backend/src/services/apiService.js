@@ -9,12 +9,12 @@ const getToken = async (studentId, password) => {
     password,
     set: process.env.DATASET_SET || 'setA',
   });
-  return response.data.token;
+  return { token: response.data.token, dataUrl: response.data.dataUrl };
 };
 
 
-const fetchDataset = async (token) => {
-  const response = await axios.get(`${BASE_URL}/private/data`, {
+const fetchDataset = async (token, dataUrl) => {
+  const response = await axios.get(`${BASE_URL}${dataUrl}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

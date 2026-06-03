@@ -56,10 +56,10 @@ const ensureStudentUser = async (student) => {
 exports.syncData = async (req, res, next) => {
   try {
     // 1. Authenticate with external API
-    const token = await getToken(process.env.STUDENT_ID, process.env.STUDENT_PASSWORD);
+    const { token, dataUrl } = await getToken(process.env.STUDENT_ID, process.env.STUDENT_PASSWORD);
     
     // 2. Fetch dataset
-    const rawData = await fetchDataset(token);
+    const rawData = await fetchDataset(token, dataUrl);
     // Assuming the dataset could be an array of mixed entities or an object containing students, companies
     // For this simulation, we'll assume it returns an object with arrays of students and companies
     // Adjust according to the actual shape of the response
