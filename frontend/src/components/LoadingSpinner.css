@@ -1,0 +1,4 @@
+.loading-overlay p {
+  font-size: 0.9rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
