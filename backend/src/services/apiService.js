@@ -7,6 +7,7 @@ const getToken = async (studentId, password) => {
   const response = await axios.post(`${BASE_URL}/public/token`, {
     studentId,
     password,
+    set: process.env.DATASET_SET || 'setA',
   });
   return response.data.token;
 };
@@ -18,7 +19,7 @@ const fetchDataset = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  return response.data.data;
 };
 
 module.exports = { getToken, fetchDataset };
