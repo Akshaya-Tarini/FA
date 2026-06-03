@@ -21,6 +21,16 @@ exports.createInterview = async (req, res, next) => {
   }
 };
 
+exports.getInterviews = async (req, res, next) => {
+  try {
+    const interviews = await Interview.find()
+      .populate({ path: 'application', populate: [ { path: 'student' }, { path: 'drive', populate: { path: 'company' } } ] });
+    res.json({ success: true, data: interviews });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.updateInterview = async (req, res, next) => {
   try {
     const { result } = req.body;

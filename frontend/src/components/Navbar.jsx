@@ -23,7 +23,9 @@ const Navbar = () => {
               Welcome, {user?.email} ({user?.role})
             </span>
             <Link to="/dashboard">Dashboard</Link>
-            <a href="#" onClick={handleLogout}>Logout</a>
+            <button type="button" className="navbar-button" onClick={handleLogout}>
+              Logout
+            </button>
           </>
         ) : (
           <Link to="/login">Login</Link>

@@ -25,6 +25,7 @@ app.use(morgan('dev'));
 app.use('/api', authRoutes);
 app.use('/auth', authRoutes);
 app.get('/auth/me', protect, getMe);
+app.get('/api/auth/me', protect, getMe);
 app.use('/health', healthRoutes);
 
 // Sync

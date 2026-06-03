@@ -5,10 +5,11 @@ exports.getStudents = async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const filter = {};
-    const { department, cgpaMin, status } = req.query;
+    const { department, cgpaMin, status, studentId } = req.query;
     if (department) filter.department = department;
     if (cgpaMin) filter.cgpa = { $gte: Number(cgpaMin) };
     if (status) filter.status = status;
+    if (studentId) filter.studentId = studentId;
     const total = await Student.countDocuments(filter);
     const students = await Student.find(filter)
       .skip((page - 1) * limit)

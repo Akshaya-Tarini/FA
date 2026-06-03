@@ -25,6 +25,26 @@ export const AuthProvider = ({ children }) => {
     }
   }, [state.token, state.user]);
 
+  useEffect(() => {
+    const initializeAuth = async () => {
+      if (!state.token) return;
+      dispatch({ type: 'LOGIN_START' });
+      try {
+        const res = await api.get('/auth/me');
+        if (res.data.success) {
+          dispatch({
+            type: 'LOGIN_SUCCESS',
+            payload: { user: res.data.data, token: state.token },
+          });
+        }
+      } catch (err) {
+        dispatch({ type: 'LOGOUT' });
+      }
+    };
+
+    initializeAuth();
+  }, []);
+
   const login = async (email, password) => {
     dispatch({ type: 'LOGIN_START' });
     try {
